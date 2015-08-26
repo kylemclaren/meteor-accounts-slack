@@ -11,6 +11,7 @@ OAuth.registerService('slack', 2, null, function(query) {
     },
     options: { profile: {
       name: identity.user,
+      email: identity.email,
       url: identity.url,
       team: identity.team,
       user_id: identity.user_id,
