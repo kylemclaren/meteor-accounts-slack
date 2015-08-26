@@ -37,7 +37,7 @@ Slack.requestCredential = function (options, credentialRequestCompleteCallback) 
         '&scope=' + flatScope +
         '&redirect_uri=' + OAuth._redirectUri('slack', config) +
         '&state=' + OAuth._stateParam(loginStyle, credentialToken) +
-        '&team=' + Meteor.settings.accounts-slack.slackTeam;
+        '&team=' + config.slackTeamId;
 
   // slack box gets taller when permissions requested.
   var height = 620;

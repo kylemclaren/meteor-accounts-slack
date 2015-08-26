@@ -5,6 +5,7 @@ Template.configureLoginServiceDialogForSlack.siteUrl = function () {
 Template.configureLoginServiceDialogForSlack.fields = function () {
   return [
     {property: 'clientId', label: 'Client ID'},
-    {property: 'secret', label: 'Client Secret'}
+    {property: 'secret', label: 'Client Secret'},
+    {property: 'slackTeam', label: 'Slack Team ID'}
   ];
 };
