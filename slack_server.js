@@ -3,6 +3,7 @@ Slack = {};
 OAuth.registerService('slack', 2, null, function(query) {
   var accessToken = getAccessToken(query);
   var identity = getIdentity(accessToken);
+  var userInfo = getUserInfo(accessToken);
 
   return {
     serviceData: {
@@ -11,7 +12,7 @@ OAuth.registerService('slack', 2, null, function(query) {
     },
     options: { profile: {
       name: identity.user,
-      email: identity.email,
+      email: userInfo.email,
       url: identity.url,
       team: identity.team,
       user_id: identity.user_id,
@@ -63,6 +64,21 @@ var getIdentity = function (accessToken) {
     return response.data.ok && response.data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Slack. " + err.message),
+                   {response: err.response});
+  }
+};
+
+//LET'S GRAB THE USERS EMAIL ADDRESS
+
+var getUserInfo = function (accessToken) {
+  try {
+    var response = HTTP.get(
+      "https://slack.com/api/users.info",
+      {params: {token: accessToken}});
+
+    return response.data.ok && response.data;
+  } catch (err) {
+    throw _.extend(new Error("Failed to fetch user info from Slack. " + err.message),
                    {response: err.response});
   }
 };
